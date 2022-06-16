@@ -1,29 +1,22 @@
 import React from 'react'
 import cn from 'classnames'
 
-interface Step {
+export interface Step {
   title: string
-  link: string
 }
-
-const steps: Step[] = [
-  { title: 'Contact', link: '/' },
-  { title: 'Speccs', link: '/form/speccs' },
-  { title: 'Summary', link: '/form/summary' },
-]
 
 interface Props {
   currentStep: number
+  steps: Step[]
   onClickStep: (step: number) => void
 }
 
-const Stepper = ({ currentStep, onClickStep }: Props) => {
+const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
   return (
     <nav className='w-full'>
       <ol className={`grid grid-cols-3`}>
         {steps.map((step, index) => (
           <li key={step.title} className='flex justify-center'>
-            {/* aria-current='step' */}
             <button
               aria-current={currentStep === index ? 'step' : undefined}
               onClick={() => onClickStep(index)}
@@ -31,7 +24,7 @@ const Stepper = ({ currentStep, onClickStep }: Props) => {
             >
               <span
                 className={cn(
-                  'rounded-full border-2 border-fuchsia-400 py-1 px-3',
+                  'rounded-full border-2 border-fuchsia-400 py-1 px-3 transition duration-300 ease-in-out hover:bg-sky-500 hover:text-white',
                   {
                     'bg-fuchsia-400 text-white': currentStep === index,
                   },
