@@ -1,6 +1,5 @@
-import type { EntryContext } from '@remix-run/deno'
+import type { EntryContext } from '@remix-run/node'
 import { RemixServer } from '@remix-run/react'
-import * as React from 'react'
 import { renderToString } from 'react-dom/server'
 
 export default function handleRequest(
@@ -9,7 +8,7 @@ export default function handleRequest(
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
-  const markup = renderToString(
+  let markup = renderToString(
     <RemixServer context={remixContext} url={request.url} />,
   )
 

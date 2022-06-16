@@ -27,11 +27,11 @@ const Stepper = ({ currentStep, onClickStep }: Props) => {
             <button
               aria-current={currentStep === index ? 'step' : undefined}
               onClick={() => onClickStep(index)}
-              className='flex flex-col items-center font-bold space-y-2'
+              className='flex flex-col items-center space-y-2 font-bold'
             >
               <span
                 className={cn(
-                  'py-1 px-3 border-2 border-fuchsia-400 rounded-full',
+                  'rounded-full border-2 border-fuchsia-400 py-1 px-3',
                   {
                     'bg-fuchsia-400 text-white': currentStep === index,
                   },

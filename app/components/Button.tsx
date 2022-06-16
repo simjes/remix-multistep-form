@@ -1,29 +1,30 @@
 import * as React from 'react'
 import cn from 'classnames'
 
-interface Props extends HTMLButtonElement {
+interface Props {
   children: React.ReactNode
   type?: 'button' | 'submit'
   direction: 'backward' | 'forward'
+  onClick: () => void
 }
 
 const Button: React.FC<Props> = ({
   children,
   direction,
   type = 'button',
-  ...rest
+  onClick,
 }) => (
   <button
+    onClick={onClick}
     type={type}
     className={cn(
-      'py-2 px-4 font-semibold rounded-full transition duration-300 ease-in-out',
+      'rounded-full py-2 px-4 font-semibold transition duration-300 ease-in-out',
       {
-        'text-white bg-fuchsia-500 hover:bg-fuchsia-400':
+        'bg-fuchsia-500 text-white hover:bg-fuchsia-400':
           direction === 'forward',
-        'text-black bg-slate-400 hover:bg-slate-300': direction === 'backward',
+        'bg-slate-400 text-black hover:bg-slate-300': direction === 'backward',
       },
     )}
-    {...rest}
   >
     {children}
   </button>

@@ -1,35 +1,6 @@
-# Remix + Deno
+# Welcome to Remix!
 
-Welcome to the Deno template for Remix! 🦕
-
-For more, check out the [Remix docs](https://remix.run/docs).
-
-## Install
-
-```sh
-npx create-remix@latest --template deno
-```
-
-## Managing dependencies
-
-Read about
-[how we recommend to manage dependencies for Remix projects using Deno](https://github.com/remix-run/remix/blob/main/decisions/0001-use-npm-to-manage-npm-dependencies-for-deno-projects.md).
-
-- ✅ You should use `npm` to install NPM packages
-  ```sh
-  npm install react
-  ```
-  ```ts
-  import { useState } from "react";
-  ```
-- ✅ You may use inlined URL imports or
-  [deps.ts](https://deno.land/manual/examples/manage_dependencies#managing-dependencies)
-  for Deno modules.
-  ```ts
-  import { copy } from "https://deno.land/std@0.138.0/streams/conversion.ts";
-  ```
-- ❌ Do not use
-  [import maps](https://deno.land/manual/linking_to_external_code/import_maps).
+- [Remix Docs](https://remix.run/docs)
 
 ## Development
 
@@ -41,18 +12,7 @@ npm run dev
 
 This starts your app in development mode, rebuilding assets on file changes.
 
-### Type hints
-
-This template provides type hinting to VS Code via a
-[dedicated import map](./.vscode/resolve_npm_imports.json).
-
-To get types in another editor, use an extension for Deno that supports import
-maps and point your editor to `./.vscode/resolve_npm_imports.json`.
-
-For more, see
-[our decision doc for interop between Deno and NPM](https://github.com/remix-run/remix/blob/main/decisions/0001-use-npm-to-manage-npm-dependencies-for-deno-projects.md#vs-code-type-hints).
-
-## Production
+## Deployment
 
 First, build your app for production:
 
@@ -66,63 +26,28 @@ Then run the app in production mode:
 npm start
 ```
 
-## Deployment
+Now you'll need to pick a host to deploy it to.
 
-Building the Deno app (`npm run build`) results in two outputs:
+### DIY
 
-- `build/` (server bundle)
-- `public/build/` (browser bundle)
+If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
 
-You can deploy these bundles to any host that runs Deno, but here we'll focus on
-deploying to [Deno Deploy](https://deno.com/deploy).
+Make sure to deploy the output of `remix build`
 
-## Setting up Deno Deploy
+- `build/`
+- `public/build/`
 
-1. [Sign up](https://dash.deno.com/signin) for Deno Deploy.
+### Using a Template
 
-2. [Create a new Deno Deploy project](https://dash.deno.com/new) for this app.
-
-3. Replace `<your deno deploy project>` in the `deploy` script in `package.json`
-   with your Deno Deploy project name:
-
-```json
-{
-  "scripts": {
-    "deploy": "deployctl deploy --project=<your deno deploy project> --include=.cache,build,public ./build/index.js"
-  }
-}
-```
-
-4. [Create a personal access token](https://dash.deno.com/account) for the Deno
-   Deploy API and export it as `DENO_DEPLOY_TOKEN`:
+When you ran `npx create-remix@latest` there were a few choices for hosting. You can run that again to create a new project, then copy over your `app/` folder to the new project that's pre-configured for your target server.
 
 ```sh
-export DENO_DEPLOY_TOKEN=<your Deno Deploy API token>
-```
-
-You may want to add this to your `rc` file (e.g. `.bashrc` or `.zshrc`) to make
-it available for new terminal sessions, but make sure you don't commit this
-token into `git`. If you want to use this token in GitHub Actions, set it as a
-GitHub secret.
-
-5. Install the Deno Deploy CLI,
-   [`deployctl`](https://github.com/denoland/deployctl):
-
-```sh
-deno install --allow-read --allow-write --allow-env --allow-net --allow-run --no-check -r -f https://deno.land/x/deploy/deployctl.ts
-```
-
-6. If you have previously installed the Deno Deploy CLI, you should update it to
-   the latest version:
-
-```sh
-deployctl upgrade
-```
-
-### Deploying to Deno Deploy
-
-After you've set up Deno Deploy, run:
-
-```sh
-npm run deploy
+cd ..
+# create a new project, and pick a pre-configured host
+npx create-remix@latest
+cd my-new-remix-app
+# remove the new project's app (not the old one!)
+rm -rf app
+# copy your app over
+cp -R ../my-old-remix-app/app app
 ```

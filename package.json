@@ -3,32 +3,33 @@
   "sideEffects": false,
   "scripts": {
     "build": "npm run build:css && remix build",
-    "deploy": "deployctl deploy --prod --include=build,public --project=<your deno deploy project> ./build/index.js",
-    "dev": "remix build && run-p dev:*",
-    "dev:deno": "cross-env NODE_ENV=development deno run --unstable --watch --allow-net --allow-read --allow-env ./build/index.js",
-    "dev:remix": "remix watch",
-    "format": "deno fmt --ignore=node_modules,build,public/build",
-    "lint": "deno lint --ignore=node_modules,build,public/build",
-    "start": "cross-env NODE_ENV=production deno run --unstable --allow-net --allow-read --allow-env ./build/index.js",
     "build:css": "tailwindcss -m -i ./styles/app.css -o app/styles/app.css",
+    "dev": "concurrently \"npm run dev:css\" \"remix dev\"",
     "dev:css": "tailwindcss -w -i ./styles/app.css -o app/styles/app.css"
   },
   "dependencies": {
     "@headlessui/react": "^1.6.4",
-    "@remix-run/deno": "^1.6.0",
+    "@remix-run/node": "^1.6.0",
     "@remix-run/react": "^1.6.0",
+    "@remix-run/serve": "^1.6.0",
     "classnames": "^2.3.1",
+    "concurrently": "^7.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.6.0",
+    "@remix-run/eslint-config": "^1.6.0",
+    "@types/react": "^17.0.45",
+    "@types/react-dom": "^17.0.17",
     "autoprefixer": "^10.4.7",
-    "concurrently": "^7.2.2",
     "cross-env": "^7.0.3",
-    "npm-run-all": "^4.1.5",
+    "eslint": "^8.15.0",
     "postcss": "^8.4.14",
-    "tailwindcss": "^3.1.3"
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.11",
+    "tailwindcss": "^3.1.3",
+    "typescript": "^4.6.4"
   },
   "engines": {
     "node": ">=14"

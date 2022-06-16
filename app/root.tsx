@@ -1,4 +1,4 @@
-import type { MetaFunction } from '@remix-run/deno'
+import type { MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -7,7 +7,6 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import * as React from 'react'
 import styles from './styles/app.css'
 
 export const meta: MetaFunction = () => ({
@@ -27,7 +26,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className='antialiased text-slate-500 dark:text-slate-400 bg-white dark:bg-slate-900'>
+      <body className='bg-white text-slate-500 antialiased dark:bg-slate-900 dark:text-slate-400'>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
