@@ -1,6 +1,14 @@
 import * as React from 'react'
+import Button from '../components/Button'
+import Stepper from '../components/Stepper'
 
 export default function Index() {
+  const [currentStep, setCurrentStep] = React.useState(0)
+
+  const _onClickStep = (step: number) => {
+    setCurrentStep(step)
+  }
+
   return (
     <div className='min-h-screen flex items-center justify-center'>
       <div className='relative w-1/2'>
@@ -10,8 +18,13 @@ export default function Index() {
         to-fuchsia-500 blur-xl block'
         />
 
-        <div className='bg-slate-800/70 shadow-[inset_0_2px_3px_rgba(255,255,255,0.06)] ring-white/[.15] backdrop-blur-xl min-h-[50vh] rounded-xl p-10'>
-          noe
+        <div className='flex justify-center items-center flex-col space-y-4 bg-slate-800/70 shadow-[inset_0_2px_3px_rgba(255,255,255,0.06)] ring-white/[.15] backdrop-blur-xl min-h-[50vh] rounded-xl p-10'>
+          <Stepper currentStep={currentStep} onClickStep={_onClickStep} />
+          <div className='flex-grow'>ble</div>
+          <div className='self-end space-x-4'>
+            <Button direction='backward'>Previous</Button>
+            <Button direction='forward'>Next</Button>
+          </div>
         </div>
       </div>
     </div>
