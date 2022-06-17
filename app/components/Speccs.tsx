@@ -28,7 +28,7 @@ const boats: Boat[] = [
     id: 3,
     name: 'Thriller Bark',
     height: 'Unknown',
-    length: 'Unknown',
+    length: '1953m',
     crew: 'Thriller Bark Pirates',
   },
 ]

@@ -1,5 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
+import { CheckIcon } from '@heroicons/react/solid'
 
 export interface Step {
   title: string
@@ -14,7 +15,7 @@ interface Props {
 const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
   return (
     <nav className='w-full'>
-      <ol className='grid grid-cols-3'>
+      <ol className='before:content[""] relative grid grid-cols-3 before:absolute before:left-0 before:right-0 before:top-1/4 before:-z-10 before:mx-auto before:h-1 before:w-4/5 before:bg-fuchsia-400'>
         {steps.map((step, index) => (
           <li
             key={step.title}
@@ -27,13 +28,13 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
             >
               <span
                 className={cn(
-                  'rounded-full border-2 border-fuchsia-400 py-1 px-3 text-white transition duration-300 ease-in-out hover:bg-sky-500',
-                  {
-                    'bg-fuchsia-400': currentStep === index,
-                  },
+                  'rounded-full border-2 border-fuchsia-400 text-white transition duration-300 ease-in-out hover:bg-sky-500',
+                  currentStep > index ? 'p-1' : 'py-1 px-3',
+                  currentStep === index ? 'bg-fuchsia-400' : 'bg-slate-800',
                 )}
               >
-                {index + 1}
+                {currentStep <= index && index + 1}
+                {currentStep > index && <CheckIcon className='h-6 w-6' />}
               </span>
               <span>{step.title}</span>
             </button>

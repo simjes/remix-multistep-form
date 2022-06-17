@@ -656,6 +656,22 @@ video {
   height: 16rem;
 }
 
+.h-10 {
+  height: 2.5rem;
+}
+
+.h-8 {
+  height: 2rem;
+}
+
+.h-4 {
+  height: 1rem;
+}
+
+.h-9 {
+  height: 2.25rem;
+}
+
 .max-h-60 {
   max-height: 15rem;
 }
@@ -724,6 +740,14 @@ video {
 
 .w-\[500px\] {
   width: 500px;
+}
+
+.w-9 {
+  width: 2.25rem;
+}
+
+.w-4 {
+  width: 1rem;
 }
 
 .max-w-md {
@@ -862,6 +886,11 @@ video {
   border-color: rgb(232 121 249 / var(--tw-border-opacity));
 }
 
+.border-slate-800 {
+  --tw-border-opacity: 1;
+  border-color: rgb(30 41 59 / var(--tw-border-opacity));
+}
+
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
@@ -901,6 +930,26 @@ video {
   background-color: rgb(14 165 233 / var(--tw-bg-opacity));
 }
 
+.bg-slate-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
+}
+
+.bg-green-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(20 83 45 / var(--tw-bg-opacity));
+}
+
+.bg-green-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(34 197 94 / var(--tw-bg-opacity));
+}
+
+.bg-green-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(21 128 61 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }
@@ -925,6 +974,14 @@ video {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-0 {
+  padding: 0px;
+}
+
+.p-1 {
+  padding: 0.25rem;
 }
 
 .py-2 {
@@ -1117,6 +1174,42 @@ video {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.outline {
+  outline-style: solid;
+}
+
+.outline-1 {
+  outline-width: 1px;
+}
+
+.outline-4 {
+  outline-width: 4px;
+}
+
+.outline-8 {
+  outline-width: 8px;
+}
+
+.outline-offset-2 {
+  outline-offset: 2px;
+}
+
+.outline-offset-1 {
+  outline-offset: 1px;
+}
+
+.outline-orange-300 {
+  outline-color: #fdba74;
+}
+
+.outline-slate-800 {
+  outline-color: #1e293b;
+}
+
+.outline-slate-800\/70 {
+  outline-color: rgb(30 41 59 / 0.7);
+}
+
 .ring-2 {
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
@@ -1196,6 +1289,58 @@ video {
 
 .ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+.before\:absolute::before {
+  content: var(--tw-content);
+  position: absolute;
+}
+
+.before\:left-0::before {
+  content: var(--tw-content);
+  left: 0px;
+}
+
+.before\:right-0::before {
+  content: var(--tw-content);
+  right: 0px;
+}
+
+.before\:top-1\/4::before {
+  content: var(--tw-content);
+  top: 25%;
+}
+
+.before\:-z-10::before {
+  content: var(--tw-content);
+  z-index: -10;
+}
+
+.before\:mx-auto::before {
+  content: var(--tw-content);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.before\:h-2::before {
+  content: var(--tw-content);
+  height: 0.5rem;
+}
+
+.before\:h-1::before {
+  content: var(--tw-content);
+  height: 0.25rem;
+}
+
+.before\:w-4\/5::before {
+  content: var(--tw-content);
+  width: 80%;
+}
+
+.before\:bg-fuchsia-400::before {
+  content: var(--tw-content);
+  --tw-bg-opacity: 1;
+  background-color: rgb(232 121 249 / var(--tw-bg-opacity));
 }
 
 .first-of-type\:justify-start:first-of-type {
