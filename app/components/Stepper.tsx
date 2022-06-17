@@ -14,9 +14,12 @@ interface Props {
 const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
   return (
     <nav className='w-full'>
-      <ol className={`grid grid-cols-3`}>
+      <ol className='grid grid-cols-3'>
         {steps.map((step, index) => (
-          <li key={step.title} className='flex justify-center'>
+          <li
+            key={step.title}
+            className='flex justify-center first-of-type:justify-start last-of-type:justify-end'
+          >
             <button
               aria-current={currentStep === index ? 'step' : undefined}
               onClick={() => onClickStep(index)}
@@ -24,9 +27,9 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
             >
               <span
                 className={cn(
-                  'rounded-full border-2 border-fuchsia-400 py-1 px-3 transition duration-300 ease-in-out hover:bg-sky-500 hover:text-white',
+                  'rounded-full border-2 border-fuchsia-400 py-1 px-3 text-white transition duration-300 ease-in-out hover:bg-sky-500',
                   {
-                    'bg-fuchsia-400 text-white': currentStep === index,
+                    'bg-fuchsia-400': currentStep === index,
                   },
                 )}
               >
