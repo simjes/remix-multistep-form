@@ -34,7 +34,7 @@ const boats: Boat[] = [
 ]
 
 // https://headlessui.dev/react/radio-group
-export default function Speccs() {
+export default function Boats() {
   const [selected, setSelected] = useState()
 
   return (

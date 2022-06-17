@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Contact from '~/components/Contact'
-import Speccs from '~/components/Speccs'
+import Boats from '~/components/Boats'
 import Summary from '~/components/Summary'
 import Button from '../components/Button'
 import Stepper, { Step } from '../components/Stepper'
 
 const steps: Step[] = [
   { title: 'Contact' },
-  { title: 'Speccs' },
+  { title: 'Boat' },
   { title: 'Summary' },
 ]
 
@@ -46,7 +46,7 @@ export default function Index() {
 
           <div className='flex h-64 w-full flex-grow justify-center'>
             {currentStep === 0 && <Contact />}
-            {currentStep === 1 && <Speccs />}
+            {currentStep === 1 && <Boats />}
             {currentStep === 2 && <Summary />}
           </div>
 

@@ -22,6 +22,7 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
             className='flex justify-center first-of-type:justify-start last-of-type:justify-end'
           >
             <button
+              // TODO aria-disabled, disabled
               aria-current={currentStep === index ? 'step' : undefined}
               onClick={() => onClickStep(index)}
               className='flex flex-col items-center space-y-2 font-bold'
