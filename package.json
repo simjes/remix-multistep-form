@@ -39,5 +39,13 @@
   },
   "engines": {
     "node": ">=14"
-  }
+  },
+  "keywords": [
+    "form",
+    "remix-validated-form",
+    "remix",
+    "zod"
+  ],
+  "name": "multistep-form-in-remix",
+  "description": "Multistep form created using Remix, remix-validated-form and zod for validation"
 }
