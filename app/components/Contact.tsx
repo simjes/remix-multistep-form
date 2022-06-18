@@ -1,13 +1,9 @@
 import ApproverSelector from './ApproverSelector'
 import FieldInput from './FieldInput'
 
-interface Props {
-  hidden: boolean
-}
-
-const Contact = ({ hidden }: Props) => {
+const Contact = () => {
   return (
-    <fieldset className='w-72 space-y-4' hidden={hidden}>
+    <fieldset className='space-y-4'>
       <ApproverSelector />
 
       <FieldInput name='name' label='Name' placeholder='Monkey D. Luffy' />

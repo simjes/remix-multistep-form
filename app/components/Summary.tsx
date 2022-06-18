@@ -24,7 +24,7 @@ const Summary = ({ getFormData }: Props) => {
   }, [getFormData])
 
   return (
-    <div className='w-full'>
+    <div>
       <h1 className='text-2xl text-white'>Summary</h1>
       <dl className='mt-4 grid grid-cols-2 gap-y-4'>
         <DescriptionEntry

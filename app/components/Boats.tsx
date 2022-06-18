@@ -1,17 +1,12 @@
-import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useControlField, useField } from 'remix-validated-form'
 import type { Boat } from '~/lib/boats'
 import { boats } from '~/lib/boats'
 
-interface Props {
-  hidden: boolean
-}
-
 const fieldName = 'boat'
 
 // https://headlessui.dev/react/radio-group
-const Boats = ({ hidden }: Props) => {
+const Boats = () => {
   const { error, validate } = useField(fieldName)
   const [selected, setSelected] = useControlField<Boat>(fieldName)
 
@@ -21,7 +16,7 @@ const Boats = ({ hidden }: Props) => {
   }
 
   return (
-    <div className='w-full' hidden={hidden}>
+    <div>
       <div className='mx-auto w-full max-w-md'>
         <RadioGroup value={selected} onChange={_onSelect} name={fieldName}>
           <RadioGroup.Label className='font-medium'>Ship</RadioGroup.Label>

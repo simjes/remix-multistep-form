@@ -1,8 +1,7 @@
-import React, { MouseEvent } from 'react'
 import cn from 'classnames'
 import { CheckIcon } from '@heroicons/react/solid'
 
-export interface Step {
+interface Step {
   title: string
 }
 

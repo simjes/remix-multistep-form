@@ -1,23 +1,27 @@
 import type { FormEvent } from 'react'
-import { useMemo } from 'react'
 import { useState } from 'react'
 import Contact from '~/components/Contact'
 import Boats from '~/components/Boats'
 import Summary from '~/components/Summary'
 import Button from '../components/Button'
-import type { Step } from '../components/Stepper'
 import Stepper from '../components/Stepper'
 import type { ActionFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import { BoatZod, CombinedZod, ContactZod, SummaryZod } from '~/lib/validator'
+import type { Validator } from 'remix-validated-form'
 import { ValidatedForm, validationError } from 'remix-validated-form'
 import useFormData from '~/lib/useFormData'
 import { withZod } from '@remix-validated-form/with-zod'
 
+interface Step {
+  title: string
+  validator: Validator<{}>
+}
+
 const steps: Step[] = [
-  { title: 'Contact' },
-  { title: 'Boat' },
-  { title: 'Summary' },
+  { title: 'Contact', validator: withZod(ContactZod) },
+  { title: 'Boat', validator: withZod(BoatZod) },
+  { title: 'Summary', validator: withZod(SummaryZod) },
 ]
 
 export const action: ActionFunction = async ({ request }) => {
@@ -36,12 +40,6 @@ export default function Index() {
   const [currentStep, setCurrentStep] = useState(0)
   const isLastStep = currentStep === steps.length - 1
   const { ref, getFormData } = useFormData()
-
-  const validator = useMemo(() => {
-    if (currentStep === 0) return withZod(ContactZod)
-    if (currentStep === 1) return withZod(BoatZod)
-    return withZod(SummaryZod)
-  }, [currentStep])
 
   const _onPrevious = () => {
     setCurrentStep(Math.max(0, currentStep - 1))
@@ -67,7 +65,7 @@ export default function Index() {
 
         <ValidatedForm
           onSubmit={_onSubmit}
-          validator={validator}
+          validator={steps[currentStep].validator}
           method='post'
           formRef={ref}
         >
@@ -77,11 +75,20 @@ export default function Index() {
           >
             <Stepper currentStep={currentStep} steps={steps} />
 
-            <div className='flex w-full flex-grow justify-center'>
+            <div className='min-h-[300px] w-full'>
               {/* We use hidden to keep the state even when we are not on that step */}
-              <Contact hidden={currentStep !== 0} />
-              <Boats hidden={currentStep !== 1} />
-              {currentStep === 2 && <Summary getFormData={getFormData} />}
+              <div hidden={currentStep !== 0}>
+                <Contact />
+              </div>
+
+              <div hidden={currentStep !== 1}>
+                <Boats />
+              </div>
+              {currentStep === 2 && (
+                <div>
+                  <Summary getFormData={getFormData} />
+                </div>
+              )}
             </div>
 
             <div className='space-x-4 self-end'>
