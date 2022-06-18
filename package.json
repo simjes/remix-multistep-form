@@ -28,6 +28,8 @@
     "autoprefixer": "^10.4.7",
     "cross-env": "^7.0.3",
     "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.4.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.11",

@@ -2,26 +2,28 @@ import { withZod } from '@remix-validated-form/with-zod'
 import { z } from 'zod'
 import { names } from '~/lib/people'
 
-export const contactValidator = withZod(
-  z.object({
-    name: z.string().min(1, { message: 'Name required' }),
-    email: z
-      .string()
-      .min(1, { message: 'Email is required' })
-      .email('Must be a valid email'),
-    // approver: z.object({
-    //   id: z.number(),
-    //   name: z.string().refine((val) => names.includes(val), {
-    //     message: 'Choose an approver',
-    //   }),
-    // }),
-    // 'approver[id]': z.number(),
-    // 'approver[name]': z.number(),
-    approver: z.string().refine((val) => names.includes(val), {
-      message: 'Choose an approver',
-    }),
+const Ble = z.object({
+  name: z.string().min(1, { message: 'Name required' }),
+  email: z
+    .string()
+    .min(1, { message: 'Email is required' })
+    .email('Must be a valid email'),
+  // approver: z.object({
+  //   id: z.number(),
+  //   name: z.string().refine((val) => names.includes(val), {
+  //     message: 'Choose an approver',
+  //   }),
+  // }),
+  // 'approver[id]': z.number(),
+  // 'approver[name]': z.number(),
+  approver: z.string().refine((val) => names.includes(val), {
+    message: 'Choose an approver',
   }),
-)
+})
+
+export const contactValidator = withZod(Ble)
+
+export type FormStuff = z.infer<typeof Ble>
 
 export const boatValidator = withZod(
   z.object({

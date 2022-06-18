@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
+import { useField } from 'remix-validated-form'
 
 interface Boat {
   id: number
@@ -40,6 +41,7 @@ interface Props {
 // https://headlessui.dev/react/radio-group
 export default function Boats({ hidden }: Props) {
   const [selected, setSelected] = useState()
+  const { error } = useField('boat')
 
   return (
     <div className='w-full' hidden={hidden}>
@@ -82,8 +84,8 @@ export default function Boats({ hidden }: Props) {
                           >
                             <span>
                               H: {boat.height}, L: {boat.length}
-                            </span>{' '}
-                            <span aria-hidden='true'>&middot;</span>{' '}
+                            </span>
+                            <span aria-hidden='true'>&middot;</span>
                             <span>{boat.crew}</span>
                           </RadioGroup.Description>
                         </div>
@@ -100,6 +102,9 @@ export default function Boats({ hidden }: Props) {
             ))}
           </div>
         </RadioGroup>
+      </div>
+      <div className='h-5'>
+        {error && <span className='text-red-500'>{error}</span>}
       </div>
     </div>
   )

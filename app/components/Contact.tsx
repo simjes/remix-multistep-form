@@ -8,11 +8,11 @@ interface Props {
 const Contact = ({ hidden }: Props) => {
   return (
     <fieldset className='w-72 space-y-4' hidden={hidden}>
+      <ApproverSelector />
+
       <FieldInput name='name' label='Name' placeholder='Monkey D. Luffy' />
 
       <FieldInput name='email' label='Mail' placeholder='luffy@op.com' />
-
-      <ApproverSelector />
     </fieldset>
   )
 }

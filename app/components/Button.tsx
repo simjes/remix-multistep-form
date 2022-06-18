@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { MouseEvent } from 'react'
+import type { MouseEvent } from 'react'
 
 interface Props {
   children: React.ReactNode
