@@ -18,7 +18,8 @@
     "concurrently": "^7.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix-validated-form": "^4.5.0"
+    "remix-validated-form": "^4.5.0",
+    "zod-form-data": "^1.2.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.6.0",

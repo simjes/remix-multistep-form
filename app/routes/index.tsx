@@ -11,7 +11,7 @@ import type { ActionFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import type { RegistrationForm } from '~/lib/validator'
 import { BoatZod, ContactZod, SummaryZod } from '~/lib/validator'
-import { ValidatedForm } from 'remix-validated-form'
+import { useFormContext, ValidatedForm } from 'remix-validated-form'
 import useFormData from '~/lib/useFormData'
 import { withZod } from '@remix-validated-form/with-zod'
 
@@ -29,7 +29,8 @@ export const action: ActionFunction = async ({ request }) => {
 }
 
 export default function Index() {
-  const [currentStep, setCurrentStep] = useState(0)
+  const form = useFormContext('reg')
+  const [currentStep, setCurrentStep] = useState(1)
   const isLastStep = currentStep === steps.length - 1
   const { ref, getFormData } = useFormData()
   const [data, setData] = useState<RegistrationForm>()
@@ -48,12 +49,14 @@ export default function Index() {
     if (!isLastStep) {
       event.preventDefault()
       const formData = getFormData()
+      console.log(formData)
       setData(formData)
 
       setCurrentStep(Math.min(currentStep + 1, steps.length - 1))
       return
     }
   }
+  console.log(form.fieldErrors)
 
   return (
     <div className='flex min-h-screen items-center justify-center'>

@@ -1,15 +1,17 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { useField } from 'remix-validated-form'
+import { useControlField, useField } from 'remix-validated-form'
 import type { Person } from '~/lib/people'
 import { people } from '~/lib/people'
 
+const fieldName = 'approver'
+
 // https://headlessui.dev/react/combobox
-const ApproverSelector = ({ name = 'approver' }: { name?: string }) => {
+const ApproverSelector = () => {
   const [query, setQuery] = useState('')
-  const { error, getInputProps, validate } = useField(name)
-  const [selected, setSelected] = useState<Person>()
+  const { error, validate } = useField(fieldName)
+  const [selected, setSelected] = useControlField<Person>(fieldName)
 
   const filteredPeople =
     query === ''
@@ -28,14 +30,12 @@ const ApproverSelector = ({ name = 'approver' }: { name?: string }) => {
 
   return (
     <fieldset>
-      <Combobox value={selected} onChange={_onSelect} name={name}>
+      <Combobox value={selected} onChange={_onSelect} name={fieldName}>
         <div className='relative'>
           <Combobox.Label className='font-medium'>Approver</Combobox.Label>
 
           <div className='relative mt-1'>
             <Combobox.Input
-              {...getInputProps()}
-              id='approver'
               className='w-full rounded-md p-2 pr-10 text-black'
               displayValue={(person: Person) => person?.name}
               placeholder='Kaido'

@@ -7,7 +7,9 @@ const useFormData = () => {
   const getFormData = () => {
     if (ref.current) {
       const data = new FormData(ref.current)
-      return Object.fromEntries(data) as RegistrationForm
+      const ble = Object.fromEntries(data) as RegistrationForm
+      console.log(ble)
+      return ble
     }
     return undefined
   }
