@@ -1,12 +1,9 @@
-import { useTransition } from '@remix-run/react'
-import React from 'react'
-
 interface Props {
-  formThing: any
+  hidden: boolean
 }
 
-const Summary = ({ formThing }: Props) => {
-  return <div>Summary</div>
+const Summary = ({ hidden }: Props) => {
+  return <div hidden={hidden}>Summary</div>
 }
 
 export default Summary

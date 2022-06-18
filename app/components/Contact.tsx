@@ -1,27 +1,16 @@
 import ApproverSelector from './ApproverSelector'
+import FieldInput from './FieldInput'
 
-// TODO: validering
-const Contact = () => {
+interface Props {
+  hidden: boolean
+}
+
+const Contact = ({ hidden }: Props) => {
   return (
-    <fieldset className='w-72 space-y-4'>
-      <label className='flex flex-col'>
-        <span className='font-medium'>Name</span>
-        <input
-          name='name'
-          className='mt-1 rounded-md p-2 text-black'
-          placeholder='Monkey D. Luffy'
-        />
-      </label>
+    <fieldset className='w-72 space-y-4' hidden={hidden}>
+      <FieldInput name='name' label='Name' placeholder='Monkey D. Luffy' />
 
-      <label className='flex flex-col'>
-        <span className='font-medium'>Mail</span>
-        <input
-          name='email'
-          className='mt-1 rounded-md p-2 text-black'
-          placeholder='luffy@op.com'
-          type='email'
-        />
-      </label>
+      <FieldInput name='email' label='Mail' placeholder='luffy@op.com' />
 
       <ApproverSelector />
     </fieldset>

@@ -9,10 +9,9 @@ export interface Step {
 interface Props {
   currentStep: number
   steps: Step[]
-  onClickStep: (event: MouseEvent<HTMLButtonElement>, step: number) => void
 }
 
-const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
+const Stepper = ({ currentStep, steps }: Props) => {
   return (
     <nav className='w-full'>
       <ol className='before:content[""] relative grid grid-cols-3 before:absolute before:left-0 before:right-0 before:top-1/4 before:-z-10 before:mx-auto before:h-1 before:w-4/5 before:bg-fuchsia-400'>
@@ -21,16 +20,13 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
             key={step.title}
             className='flex justify-center first-of-type:justify-start last-of-type:justify-end'
           >
-            <button
-              // TODO aria-disabled, disabled
-              type='button'
+            <div
               aria-current={currentStep === index ? 'step' : undefined}
-              onClick={(event) => onClickStep(event, index)}
               className='flex flex-col items-center space-y-2 font-bold'
             >
               <span
                 className={cn(
-                  'rounded-full border-2 border-fuchsia-400 text-white transition duration-300 ease-in-out hover:bg-sky-500',
+                  'rounded-full border-2 border-fuchsia-400 text-white transition duration-300 ease-in-out',
                   currentStep > index ? 'p-1' : 'py-1 px-3',
                   currentStep === index ? 'bg-fuchsia-400' : 'bg-slate-800',
                 )}
@@ -39,7 +35,7 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
                 {currentStep > index && <CheckIcon className='h-6 w-6' />}
               </span>
               <span>{step.title}</span>
-            </button>
+            </div>
           </li>
         ))}
       </ol>

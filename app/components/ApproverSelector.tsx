@@ -1,25 +1,19 @@
 import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+import { useField } from 'remix-validated-form'
+import { people } from '~/lib/people'
 
-interface Person {
+export interface Person {
   id: number
   name: string
 }
 
-const people: Person[] = [
-  { id: 1, name: 'Trafalgar Law' },
-  { id: 2, name: 'Shanks' },
-  { id: 3, name: 'Boa' },
-  { id: 4, name: 'Kaido' },
-  { id: 5, name: 'Buddy' },
-  { id: 6, name: 'Linlin' },
-]
-
 // https://headlessui.dev/react/combobox
-const ApproverSelector = () => {
-  const [selected, setSelected] = useState(null)
+const ApproverSelector = ({ name = 'approver' }: { name?: string }) => {
   const [query, setQuery] = useState('')
+  const { error, getInputProps, validate } = useField(name)
+  const [selected, setSelected] = useState<Person>()
 
   const filteredPeople =
     query === ''
@@ -31,21 +25,25 @@ const ApproverSelector = () => {
             .includes(query.toLowerCase().replace(/\s+/g, '')),
         )
 
+  const _onSelect = (person: Person) => {
+    setSelected(person)
+    validate()
+  }
+
   return (
-    <div>
-      <label className='font-medium' htmlFor='approver-selector'>
-        Approver
-      </label>
-      <Combobox value={selected} onChange={setSelected}>
-        <div className='relative mt-1'>
-          <div>
+    <fieldset>
+      <Combobox value={selected} onChange={_onSelect} name={name}>
+        <div className='relative'>
+          <Combobox.Label className='font-medium'>Approver</Combobox.Label>
+
+          <div className='relative mt-1'>
             <Combobox.Input
-              id='approver-selector'
-              name='approver'
+              {...getInputProps()}
+              id='approver'
               className='w-full rounded-md p-2 pr-10 text-black'
               displayValue={(person: Person) => person?.name}
+              placeholder='Kaido'
               onChange={(event) => setQuery(event.target.value)}
-              placeholder='Moneky D. Garp'
             />
             <Combobox.Button className='absolute inset-y-0 right-0 flex items-center pr-2'>
               <SelectorIcon
@@ -104,7 +102,10 @@ const ApproverSelector = () => {
           </Transition>
         </div>
       </Combobox>
-    </div>
+      <div className='h-5'>
+        {error && <span className='text-red-500'>{error}</span>}
+      </div>
+    </fieldset>
   )
 }
 

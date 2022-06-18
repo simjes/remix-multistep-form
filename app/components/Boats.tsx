@@ -33,12 +33,16 @@ const boats: Boat[] = [
   },
 ]
 
+interface Props {
+  hidden: boolean
+}
+
 // https://headlessui.dev/react/radio-group
-export default function Boats() {
+export default function Boats({ hidden }: Props) {
   const [selected, setSelected] = useState()
 
   return (
-    <div className='w-full'>
+    <div className='w-full' hidden={hidden}>
       <div className='mx-auto w-full max-w-md'>
         <RadioGroup value={selected} onChange={setSelected} name='boat'>
           <RadioGroup.Label className='font-medium'>Ship</RadioGroup.Label>
