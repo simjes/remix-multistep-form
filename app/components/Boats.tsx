@@ -40,7 +40,7 @@ export default function Boats() {
   return (
     <div className='w-full'>
       <div className='mx-auto w-full max-w-md'>
-        <RadioGroup value={selected} onChange={setSelected}>
+        <RadioGroup value={selected} onChange={setSelected} name='boat'>
           <RadioGroup.Label className='font-medium'>Ship</RadioGroup.Label>
           <div className='mt-1 space-y-2'>
             {boats.map((boat) => (

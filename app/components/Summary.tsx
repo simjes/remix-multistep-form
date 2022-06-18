@@ -1,6 +1,11 @@
+import { useTransition } from '@remix-run/react'
 import React from 'react'
 
-const Summary = () => {
+interface Props {
+  formThing: any
+}
+
+const Summary = ({ formThing }: Props) => {
   return <div>Summary</div>
 }
 

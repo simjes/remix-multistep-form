@@ -7,6 +7,7 @@ const Contact = () => {
       <label className='flex flex-col'>
         <span className='font-medium'>Name</span>
         <input
+          name='name'
           className='mt-1 rounded-md p-2 text-black'
           placeholder='Monkey D. Luffy'
         />
@@ -15,6 +16,7 @@ const Contact = () => {
       <label className='flex flex-col'>
         <span className='font-medium'>Mail</span>
         <input
+          name='email'
           className='mt-1 rounded-md p-2 text-black'
           placeholder='luffy@op.com'
           type='email'

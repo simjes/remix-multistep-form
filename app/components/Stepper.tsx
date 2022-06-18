@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { MouseEvent } from 'react'
 import cn from 'classnames'
 import { CheckIcon } from '@heroicons/react/solid'
 
@@ -9,7 +9,7 @@ export interface Step {
 interface Props {
   currentStep: number
   steps: Step[]
-  onClickStep: (step: number) => void
+  onClickStep: (event: MouseEvent<HTMLButtonElement>, step: number) => void
 }
 
 const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
@@ -23,8 +23,9 @@ const Stepper = ({ currentStep, steps, onClickStep }: Props) => {
           >
             <button
               // TODO aria-disabled, disabled
+              type='button'
               aria-current={currentStep === index ? 'step' : undefined}
-              onClick={() => onClickStep(index)}
+              onClick={(event) => onClickStep(event, index)}
               className='flex flex-col items-center space-y-2 font-bold'
             >
               <span

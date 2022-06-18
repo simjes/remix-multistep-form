@@ -41,6 +41,7 @@ const ApproverSelector = () => {
           <div>
             <Combobox.Input
               id='approver-selector'
+              name='approver'
               className='w-full rounded-md p-2 pr-10 text-black'
               displayValue={(person: Person) => person?.name}
               onChange={(event) => setQuery(event.target.value)}

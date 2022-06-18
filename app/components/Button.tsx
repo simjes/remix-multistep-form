@@ -1,10 +1,11 @@
 import cn from 'classnames'
+import { MouseEvent } from 'react'
 
 interface Props {
   children: React.ReactNode
   type?: 'button' | 'submit'
   direction: 'backward' | 'forward'
-  onClick: () => void
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void
 }
 
 const Button: React.FC<Props> = ({
