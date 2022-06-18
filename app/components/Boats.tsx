@@ -1,52 +1,27 @@
 import { useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import { useField } from 'remix-validated-form'
-
-interface Boat {
-  id: number
-  name: string
-  height: string
-  length: string
-  crew: string
-}
-
-const boats: Boat[] = [
-  {
-    id: 1,
-    name: 'Thousand Sunny',
-    height: '56m',
-    length: '39m',
-    crew: 'Straw Hat Pirates',
-  },
-  {
-    id: 2,
-    name: 'Sanjuan Wolf — Colossal Battleship',
-    height: '180m',
-    length: 'Unknown',
-    crew: 'Blackbeard Pirates',
-  },
-  {
-    id: 3,
-    name: 'Thriller Bark',
-    height: 'Unknown',
-    length: '1953m',
-    crew: 'Thriller Bark Pirates',
-  },
-]
+import type { Boat } from '~/lib/boats'
+import { boats } from '~/lib/boats'
 
 interface Props {
   hidden: boolean
 }
 
 // https://headlessui.dev/react/radio-group
-export default function Boats({ hidden }: Props) {
-  const [selected, setSelected] = useState()
-  const { error } = useField('boat')
+const Boats = ({ hidden }: Props) => {
+  const [selected, setSelected] = useState<Boat>()
+  const { error, validate } = useField('boat')
+
+  const _onSelect = (boat: Boat) => {
+    setSelected(boat)
+    validate()
+  }
 
   return (
     <div className='w-full' hidden={hidden}>
       <div className='mx-auto w-full max-w-md'>
-        <RadioGroup value={selected} onChange={setSelected} name='boat'>
+        <RadioGroup value={selected} onChange={_onSelect} name='boat'>
           <RadioGroup.Label className='font-medium'>Ship</RadioGroup.Label>
           <div className='mt-1 space-y-2'>
             {boats.map((boat) => (
@@ -109,6 +84,8 @@ export default function Boats({ hidden }: Props) {
     </div>
   )
 }
+
+export default Boats
 
 function CheckIcon(props: any) {
   return (

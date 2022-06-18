@@ -2,12 +2,8 @@ import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 import { useField } from 'remix-validated-form'
+import type { Person } from '~/lib/people'
 import { people } from '~/lib/people'
-
-export interface Person {
-  id: number
-  name: string
-}
 
 // https://headlessui.dev/react/combobox
 const ApproverSelector = ({ name = 'approver' }: { name?: string }) => {

@@ -7,7 +7,12 @@ export const names = [
   'Linlin',
 ]
 
-export const people = names.map((name, index) => ({
+export interface Person {
+  id: number
+  name: string
+}
+
+export const people: Person[] = names.map((name, index) => ({
   id: index + 1,
   name,
 }))
