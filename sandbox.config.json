@@ -6,5 +6,6 @@
   "container": {
     "port": 3000,
     "node": 16
-  }
+  },
+  "template": "remix"
 }
