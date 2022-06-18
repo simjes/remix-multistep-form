@@ -1,4 +1,5 @@
 import type { FormEvent } from 'react'
+import { useMemo } from 'react'
 import { useState } from 'react'
 import Contact from '~/components/Contact'
 import Boats from '~/components/Boats'
@@ -8,9 +9,11 @@ import type { Step } from '../components/Stepper'
 import Stepper from '../components/Stepper'
 import type { ActionFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
-import { contactValidator, FormStuff } from '~/lib/validator'
+import type { RegistrationForm } from '~/lib/validator'
+import { BoatZod, ContactZod, SummaryZod } from '~/lib/validator'
 import { ValidatedForm } from 'remix-validated-form'
 import useFormData from '~/lib/useFormData'
+import { withZod } from '@remix-validated-form/with-zod'
 
 const steps: Step[] = [
   { title: 'Contact' },
@@ -29,7 +32,13 @@ export default function Index() {
   const [currentStep, setCurrentStep] = useState(0)
   const isLastStep = currentStep === steps.length - 1
   const { ref, getFormData } = useFormData()
-  const [data, setData] = useState<FormStuff>()
+  const [data, setData] = useState<RegistrationForm>()
+
+  const validator = useMemo(() => {
+    if (currentStep === 0) return withZod(ContactZod)
+    if (currentStep === 1) return withZod(BoatZod)
+    return withZod(SummaryZod)
+  }, [currentStep])
 
   const _onPrevious = () => {
     setCurrentStep(Math.max(0, currentStep - 1))
@@ -57,9 +66,8 @@ export default function Index() {
 
         <ValidatedForm
           onSubmit={_onSubmit}
-          validator={contactValidator}
+          validator={validator}
           method='post'
-          id='registration-form'
           formRef={ref}
         >
           <fieldset

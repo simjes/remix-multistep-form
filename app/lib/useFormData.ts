@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import type { FormStuff } from './validator'
+import type { RegistrationForm } from './validator'
 
 const useFormData = () => {
   const ref = useRef(null)
@@ -7,9 +7,7 @@ const useFormData = () => {
   const getFormData = () => {
     if (ref.current) {
       const data = new FormData(ref.current)
-      var formStuff: FormStuff = {} as FormStuff
-      data.forEach((value, key) => (formStuff[key] = value))
-      return formStuff
+      return Object.fromEntries(data) as RegistrationForm
     }
     return undefined
   }

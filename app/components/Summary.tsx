@@ -1,14 +1,11 @@
-import type { FormStuff } from '~/lib/validator'
+import type { RegistrationForm } from '~/lib/validator'
 
 interface Props {
-  formStuff?: FormStuff
+  formStuff?: RegistrationForm
   hidden: boolean
 }
 
 const Summary = ({ hidden, formStuff }: Props) => {
-  if (!hidden) {
-    debugger
-  }
   return (
     <div hidden={hidden}>
       <h1>Summary</h1>
