@@ -1,33 +1,42 @@
+import { withZod } from '@remix-validated-form/with-zod'
+import { useEffect, useState } from 'react'
 import type { RegistrationForm } from '~/lib/validator'
+import { CombinedZod } from '~/lib/validator'
+import DescriptionEntry from './DescriptionEntry'
 
 interface Props {
-  formStuff?: RegistrationForm
-  hidden: boolean
+  getFormData: () => FormData | undefined
 }
 
-const Summary = ({ hidden, formStuff }: Props) => {
+const Summary = ({ getFormData }: Props) => {
+  const [summary, setSummary] = useState<RegistrationForm>()
+
+  useEffect(() => {
+    const formData = getFormData()
+    if (!formData) return
+
+    withZod(CombinedZod)
+      .validate(formData)
+      .then(({ data }) => {
+        // We assume the validation is correct since we got to this component at all
+        setSummary(data)
+      })
+  }, [getFormData])
+
   return (
-    <div hidden={hidden}>
-      <h1>Summary</h1>
-      <div>{formStuff?.approver}</div>
-      <div>{formStuff?.email}</div>
-      <div>{formStuff?.name}</div>
-      <div>{JSON.stringify(formStuff)}</div>
+    <div className='w-full'>
+      <h1 className='text-2xl text-white'>Summary</h1>
+      <dl className='mt-4 grid grid-cols-2 gap-y-4'>
+        <DescriptionEntry
+          term='Approver'
+          description={summary?.approver.name}
+        />
+        <DescriptionEntry term='Name' description={summary?.name} />
+        <DescriptionEntry term='Mail' description={summary?.email} />
+        <DescriptionEntry term='Boat' description={summary?.boat.name} />
+      </dl>
     </div>
   )
 }
 
 export default Summary
-
-const bler = {
-  'approver[id]': '2',
-  'approver[name]': 'Shanks',
-  approver: 'Shanks',
-  name: 'lol',
-  email: 'l@l.com',
-  'boat[id]': '1',
-  'boat[name]': 'Thousand Sunny',
-  'boat[height]': '56m',
-  'boat[length]': '39m',
-  'boat[crew]': 'Straw Hat Pirates',
-}

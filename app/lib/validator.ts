@@ -40,7 +40,7 @@ export const SummaryZod = z.object({})
 
 export const CombinedZod = BoatZod.merge(ContactZod)
 
-export type RegistrationForm = z.infer<typeof ContactZod | typeof BoatZod>
+export type RegistrationForm = z.infer<typeof CombinedZod>
 
 // export const Combined = zfd.formData({
 //   ContactZod,

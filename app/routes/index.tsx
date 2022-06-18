@@ -9,9 +9,8 @@ import type { Step } from '../components/Stepper'
 import Stepper from '../components/Stepper'
 import type { ActionFunction } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
-import type { RegistrationForm } from '~/lib/validator'
-import { BoatZod, ContactZod, SummaryZod } from '~/lib/validator'
-import { useFormContext, ValidatedForm } from 'remix-validated-form'
+import { BoatZod, CombinedZod, ContactZod, SummaryZod } from '~/lib/validator'
+import { ValidatedForm, validationError } from 'remix-validated-form'
 import useFormData from '~/lib/useFormData'
 import { withZod } from '@remix-validated-form/with-zod'
 
@@ -23,17 +22,20 @@ const steps: Step[] = [
 
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const values = Object.fromEntries(formData)
-  console.log(values)
-  return redirect(`/projects/${formData.get('name')}`)
+  const result = await withZod(CombinedZod).validate(formData)
+  console.log(result.data)
+
+  if (result.error) {
+    return validationError(result.error)
+  }
+
+  return redirect(`/projects/${result.data.name}`)
 }
 
 export default function Index() {
-  const form = useFormContext('reg')
-  const [currentStep, setCurrentStep] = useState(1)
+  const [currentStep, setCurrentStep] = useState(0)
   const isLastStep = currentStep === steps.length - 1
   const { ref, getFormData } = useFormData()
-  const [data, setData] = useState<RegistrationForm>()
 
   const validator = useMemo(() => {
     if (currentStep === 0) return withZod(ContactZod)
@@ -48,15 +50,11 @@ export default function Index() {
   const _onSubmit = (_: unknown, event: FormEvent) => {
     if (!isLastStep) {
       event.preventDefault()
-      const formData = getFormData()
-      console.log(formData)
-      setData(formData)
 
       setCurrentStep(Math.min(currentStep + 1, steps.length - 1))
       return
     }
   }
-  console.log(form.fieldErrors)
 
   return (
     <div className='flex min-h-screen items-center justify-center'>
@@ -80,9 +78,10 @@ export default function Index() {
             <Stepper currentStep={currentStep} steps={steps} />
 
             <div className='flex w-full flex-grow justify-center'>
+              {/* We use hidden to keep the state even when we are not on that step */}
               <Contact hidden={currentStep !== 0} />
               <Boats hidden={currentStep !== 1} />
-              <Summary hidden={currentStep !== 2} formStuff={data} />
+              {currentStep === 2 && <Summary getFormData={getFormData} />}
             </div>
 
             <div className='space-x-4 self-end'>

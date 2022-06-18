@@ -620,6 +620,10 @@ video {
   display: none;
 }
 
+.\!hidden {
+  display: none !important;
+}
+
 .h-5 {
   height: 1.25rem;
 }
@@ -699,6 +703,10 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -713,6 +721,10 @@ video {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-y-4 {
+  row-gap: 1rem;
 }
 
 .space-y-2 > :not([hidden]) ~ :not([hidden]) {
@@ -906,6 +918,16 @@ video {
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .font-medium {
