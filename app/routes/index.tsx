@@ -70,7 +70,7 @@ export default function Index() {
           formRef={ref}
         >
           <fieldset
-            className='flex min-h-[536px] flex-col items-center justify-center space-y-6 rounded-xl 
+            className='flex min-h-[50vh] flex-col items-center justify-center space-y-6 rounded-xl 
           bg-slate-800/70 p-10 shadow-[inset_0_2px_3px_rgba(255,255,255,0.06)] ring-white/[.15] backdrop-blur-xl'
           >
             <Stepper currentStep={currentStep} steps={steps} />
